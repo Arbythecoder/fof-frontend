@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Recipe Preview | FoF Recipes</title>
+    <!-- Shared head content -->
+    <style>
+        .recipe-header {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('../images/recipe-preview-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            margin-bottom: 40px;
+        }
+        .recipe-meta {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .meta-item {
+            text-align: center;
+            padding: 10px;
+        }
+        .meta-item i {
+            color: #cc0000;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        .ingredient-card, .instruction-card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .instruction-step {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        .step-number {
+            background: #cc0000;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header/Nav -->
+
+    <section class="recipe-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h1>Tropical Smoothie Bowl</h1>
+                    <p class="lead">A refreshing blend of tropical fruits with coconut and granola</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md-8 mx-auto">
+                    <div class="recipe-meta">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="meta-item">
+                                    <i class="fa fa-clock-o"></i>
+                                    <h5>Prep Time</h5>
+                                    <p>15 minutes</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="meta-item">
+                                    <i class="fa fa-users"></i>
+                                    <h5>Servings</h5>
+                                    <p>2 people</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="meta-item">
+                                    <i class="fa fa-tag"></i>
+                                    <h5>Category</h5>
+                                    <p>Breakfast</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card ingredient-card">
+                        <div class="card-header bg-danger text-white">
+                            <h4 class="mb-0">Ingredients</h4>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">1 cup frozen mango</li>
+                                <li class="list-group-item">1 banana</li>
+                                <li class="list-group-item">1/2 cup coconut milk</li>
+                                <li class="list-group-item">1 tbsp honey</li>
+                                <li class="list-group-item">1/4 cup granola</li>
+                                <li class="list-group-item">1 tbsp chia seeds</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button class="btn btn-outline-danger mr-2">
+                            <i class="fa fa-edit"></i> Edit Recipe
+                        </button>
+                        <button class="btn btn-danger">
+                            <i class="fa fa-shopping-cart"></i> Order Ingredients
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col-lg-8">
+                    <div class="card instruction-card">
+                        <div class="card-header bg-danger text-white">
+                            <h4 class="mb-0">Instructions</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="instruction-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <p>Combine mango, banana, and coconut milk in a blender. Blend until smooth.</p>
+                                </div>
+                            </div>
+                            <div class="instruction-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <p>Pour the smoothie into a bowl.</p>
+                                </div>
+                            </div>
+                            <div class="instruction-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <p>Top with granola, chia seeds, and additional fruit if desired.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <h4>Chef's Notes</h4>
+                            <p>For a thicker consistency, use frozen banana slices. You can substitute almond milk for coconut milk if preferred.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+</body>
+</html>

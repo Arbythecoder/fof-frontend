@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>FoF - Flavors of Freshness | Premium Mocktails & Healthy Greens</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Premium non-alcoholic mocktails and healthy green drinks. Fresh, vibrant flavors for every occasion.">
+
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        :root {
+            --primary-red: #cc0000;
+            --dark-red: #a30000;
+            --light-red: #ff3333;
+            --pure-white: #ffffff;
+            --off-white: #f8f9fa;
+            --dark-black: #212529;
+            --light-black: #343a40;
+            --text-gray: #6c757d;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark-black);
+            overflow-x: hidden;
+            background-color: var(--off-white);
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        /* ========== NAVBAR ========== */
+        .navbar {
+            background: rgba(204, 0, 0, 0.95) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            padding: 15px 0;
+            transition: all 0.4s ease;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .navbar.scrolled {
+            padding: 10px 0;
+            background: rgba(204, 0, 0, 0.98) !important;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.15);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--pure-white) !important;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand img {
+            height: 40px;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled .navbar-brand img {
+            height: 35px;
+        }
+
+        .nav-link {
+            color: rgba(255,255,255,0.9) !important;
+            font-weight: 500;
+            padding: 8px 15px !important;
+            margin: 0 5px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link:focus {
+            color: var(--pure-white) !important;
+        }
+
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--pure-white);
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover:after, .nav-link:focus:after {
+            width: 100%;
+        }
+
+        .nav-item.active .nav-link {
+            color: var(--pure-white) !important;
+            font-weight: 600;
+        }
+
+        .nav-item.active .nav-link:after {
+            width: 100%;
+        }
+
+        .dropdown-menu {
+            background-color: var(--pure-white);
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 10px 0;
+            margin-top: 10px;
+        }
+
+        .dropdown-item {
+            padding: 8px 20px;
+            color: var(--dark-black);
+            transition: all 0.2s;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--primary-red);
+            color: var(--pure-white);
+        }
+
+        .cart-icon, .search-icon {
+            font-size: 1.3rem;
+            color: var(--pure-white);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .cart-icon:hover, .search-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--pure-white);
+            color: var(--primary-red);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        .navbar-toggler {
+            border: none;
+            padding: 0.5rem;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        /* ========== HERO SECTION ========== */
+        .hero-section {
+            height: 100vh;
+            min-height: 700px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--pure-white);
+            margin-top: 0;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 0 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-highlight {
+            color: var(--primary-red);
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-highlight:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 8px;
+            background: var(--primary-red);
+            bottom: 8px;
+            left: 0;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        .btn-hero {
+            background-color: var(--primary-red);
+            color: var(--pure-white);
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-hero:hover {
+            background-color: var(--dark-red);
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(0,0,0,0.3);
+            color: var(--pure-white);
+        }
+
+        /* ========== ABOUT SECTION ========== */
+        .about-section {
+            padding: 100px 0;
+            background-color: var(--pure-white);
+            position: relative;
+        }
+
+        .about-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--dark-black);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 4px;
+            background: var(--primary-red);
+            bottom: -10px;
+            left: 0;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--light-black);
+            margin-bottom: 2rem;
+        }
+
+        .founder-quote {
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--dark-black);
+            padding-left: 20px;
+            border-left: 3px solid var(--primary-red);
+            margin: 2rem 0;
+        }
+
+        .founder-name {
+            font-weight: 600;
+            color: var(--primary-red);
+        }
+
+        .about-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+        }
+
+        .about-image:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.5s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* ========== FEATURED PRODUCTS ========== */
+        .products-section {
+            padding: 100px 0;
+            background-color: var(--off-white);
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header .section-title {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-header .section-title:after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .product-card {
+            background: var(--pure-white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.4s ease;
+            margin-bottom: 30px;
+            height: 100%;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--primary-red);
+            color: var(--pure-white);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .product-img-container {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.1);
+        }
+
+        .product-body {
+            padding: 25px;
+        }
+
+        .product-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark-black);
+        }
+
+        .product-desc {
+            font-size: 0.95rem;
+            color: var(--text-gray);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-red);
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-product {
+            background-color: var(--primary-red);
+            color: var(--pure-white);
+            border: none;
+            padding: 10px 25px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-product:hover {
+            background-color: var(--dark-red);
+            color: var(--pure-white);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(204,0,0,0.3);
+        }
+
+        /* ========== VALUES SECTION ========== */
+        .values-section {
+            padding: 100px 0;
+            background-color: var(--pure-white);
+            position: relative;
+        }
+
+        .value-card {
+            background: var(--off-white);
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.4s ease;
+            height: 100%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .value-icon {
+            font-size: 3rem;
+            color: var(--primary-red);
+            margin-bottom: 1.5rem;
+        }
+
+        .value-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--dark-black);
+        }
+
+        .value-text {
+            font-size: 1rem;
+            color: var(--text-gray);
+            line-height: 1.7;
+        }
+
+        /* ========== TESTIMONIALS ========== */
+        .testimonials-section {
+            padding: 100px 0;
+            background-color: var(--off-white);
+            position: relative;
+        }
+
+        .testimonial-card {
+            background: var(--pure-white);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin: 15px;
+            transition: all 0.4s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .testimonial-text {
+            font-size: 1rem;
+            color: var(--light-black);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .testimonial-text:before {
+            content: '"';
+            font-size: 4rem;
+            color: rgba(204,0,0,0.1);
+            position: absolute;
+            top: -20px;
+            left: -15px;
+            font-family: 'Playfair Display', serif;
+            line-height: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+            border: 3px solid var(--primary-red);
+        }
+
+        .author-info h5 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+            color: var(--dark-black);
+        }
+
+        .author-info p {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            margin-bottom: 0;
+        }
+
+        /* ========== CALL TO ACTION ========== */
+        .cta-section {
+            padding: 100px 0;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/cta-bg.jpg') center/cover no-repeat;
+            color: var(--pure-white);
+            text-align: center;
+            position: relative;
+        }
+
+        .cta-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-text {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-cta {
+            background-color: var(--primary-red);
+            color: var(--pure-white);
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-cta:hover {
+            background-color: var(--pure-white);
+            color: var(--primary-red);
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(0,0,0,0.3);
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            background-color: var(--dark-black);
+            color: var(--pure-white);
+            padding: 80px 0 30px;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            color: var(--pure-white);
+        }
+
+        .footer-about {
+            margin-bottom: 2rem;
+        }
+
+        .footer-about p {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.8;
+        }
+
+        .footer-links h5, .footer-contact h5 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--pure-white);
+            position: relative;
+        }
+
+        .footer-links h5:after, .footer-contact h5:after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background: var(--primary-red);
+            bottom: -8px;
+            left: 0;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-red);
+            padding-left: 5px;
+        }
+
+        .footer-contact p {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .footer-contact i {
+            margin-right: 10px;
+            color: var(--primary-red);
+            font-size: 1rem;
+            margin-top: 3px;
+        }
+
+        .footer-social {
+            display: flex;
+            margin-top: 2rem;
+        }
+
+        .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            color: var(--pure-white);
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            background: var(--primary-red);
+            transform: translateY(-3px);
+        }
+
+        .footer-newsletter p {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .newsletter-form {
+            display: flex;
+            margin-bottom: 1.5rem;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 50px 0 0 50px;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .newsletter-btn {
+            background: var(--primary-red);
+            color: var(--pure-white);
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 50px 50px 0;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-btn:hover {
+            background: var(--dark-red);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 30px;
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 0;
+        }
+
+        .footer-bottom a {
+            color: var(--primary-red);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-bottom a:hover {
+            color: var(--pure-white);
+        }
+
+        /* ========== ANIMATIONS & EFFECTS ========== */
+        [data-aos="fade-up"] {
+            transform: translateY(30px);
+            opacity: 0;
+            transition-property: transform, opacity;
+        }
+
+        [data-aos="fade-up"].aos-animate {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        [data-aos="fade-in"] {
+            opacity: 0;
+            transition-property: opacity;
+        }
+
+        [data-aos="fade-in"].aos-animate {
+            opacity: 1;
+        }
+
+        [data-aos="zoom-in"] {
+            transform: scale(0.9);
+            opacity: 0;
+            transition-property: transform, opacity;
+        }
+
+        [data-aos="zoom-in"].aos-animate {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        /* ========== RESPONSIVE STYLES ========== */
+        @media (max-width: 1199.98px) {
+            .hero-title {
+                font-size: 4rem;
+            }
+        }
+
+        @media (max-width: 991.98px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .navbar {
+                padding: 10px 0;
+            }
+            
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+            
+            .navbar-brand img {
+                height: 35px;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .hero-section {
+                height: auto;
+                min-height: 600px;
+                padding-top: 100px;
+                padding-bottom: 80px;
+            }
+            
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .about-section, .products-section, .values-section, 
+            .testimonials-section, .cta-section {
+                padding: 70px 0;
+            }
+            
+            .footer {
+                padding: 60px 0 20px;
+            }
+            
+            .footer-links, .footer-contact, .footer-newsletter {
+                margin-bottom: 40px;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .btn-hero, .btn-cta {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .about-section, .products-section, .values-section, 
+            .testimonials-section, .cta-section {
+                padding: 50px 0;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-input {
+                border-radius: 50px;
+                margin-bottom: 10px;
+            }
+            
+            .newsletter-btn {
+                border-radius: 50px;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========== NAVBAR ========== -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/logo.png" alt="FoF Logo">
+                Flavors of Freshness
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="products.html">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="recipes.html">Recipes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="events.html">Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item dropdown ms-lg-3">
+                        <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
+                            <li><a class="dropdown-item" href="login.html">Login</a></li>
+                            <li><a class="dropdown-item" href="sign-up.html">Sign Up</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="myprofile.html">My Profile</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="nav-link cart-icon" href="cart.html">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">3</span>
+                        </a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="nav-link search-icon" href="search.html">
+                            <i class="fas fa-search"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ========== HERO SECTION ========== -->
+    <section class="hero-section">
+        <video class="hero-video" autoplay muted loop>
+            <source src="./images/veggies.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="container">
+                <h1 class="hero-title animate__animated animate__fadeInDown" data-aos="fade-up" data-aos-delay="100">
+                    <span class="hero-highlight">Refresh</span> Your Life With <span class="hero-highlight">Nature's</span> Best
+                </h1>
+                <p class="hero-subtitle animate__animated animate__fadeIn" data-aos="fade-up" data-aos-delay="200">
+                    Premium non-alcoholic mocktails and healthy green drinks crafted with fresh, organic ingredients for vibrant living.
+                </p>
+                <div data-aos="fade-up" data-aos-delay="300">
+                    <a href="products.html" class="btn btn-hero animate__animated animate__fadeInUp">Explore Our Menu</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== ABOUT SECTION ========== -->
+    <section class="about-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right">
+                    <h2 class="section-title">Our Story</h2>
+                    <p class="section-subtitle">From passion to purpose - our journey to refresh your life</p>
+                    <p class="about-text">
+                        Founded in 2020, Flavors of Freshness began as a small passion project to bring vibrant, healthy drink options to our community. What started as a humble kitchen experiment has blossomed into a beloved brand known for its innovative mocktails and nutrient-packed green drinks.
+                    </p>
+                    <p class="about-text">
+                        Every recipe is crafted with care, using only the freshest ingredients sourced from trusted local suppliers. We believe that what you drink should be as nourishing as it is delicious.
+                    </p>
+                    <blockquote class="founder-quote">
+                        "I created FoF to offer drinks that not only taste incredible but also make you feel amazing. Our mission is to prove that healthy can be exciting and delicious."
+                        <span class="founder-name">— Kemisola Ogunrombi, Founder</span>
+                    </blockquote>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="about-image">
+                        <img src="./images/chef-2.jpg" alt="FoF Founder" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FEATURED PRODUCTS ========== -->
+    <section class="products-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Signature Creations</h2>
+                <p class="section-subtitle">Our most popular mocktails and green drinks</p>
+            </div>
+            <div class="row">
+                <!-- Product 1 -->
+                <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="product-card">
+                        <div class="product-badge">Bestseller</div>
+                        <div class="product-img-container">
+                            <img src="./images/drink-2.jpg" class="product-img" alt="Green Revive Smoothie">
+                        </div>
+                        <div class="product-body">
+                            <h3 class="product-title">Green Revive Smoothie</h3>
+                            <p class="product-desc">Kale, spinach, pineapple, banana, and coconut water blended to perfection.</p>
+                            <p class="product-price">$8.99</p>
+                            <a href="./user/login.html" class="btn btn-product">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product 2 -->
+                <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="product-card">
+                        <div class="product-badge">New</div>
+                        <div class="product-img-container">
+                            <img src="./images/mocktails1.jpg" class="product-img" alt="Berry Blast Mocktail">
+                        </div>
+                        <div class="product-body">
+                            <h3 class="product-title">Berry Blast Mocktail</h3>
+                            <p class="product-desc">Mixed berries, mint, lime, and sparkling water for a refreshing burst.</p>
+                            <p class="product-price">$7.99</p>
+                            <a href="./user/login.html" class="btn btn-product">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product 3 -->
+                <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="product-card">
+                        <div class="product-img-container">
+                            <img src="./images/drink-4.jpg" class="product-img" alt="Tropical Detox Drink">
+                        </div>
+                        <div class="product-body">
+                            <h3 class="product-title">Tropical Detox Drink</h3>
+                            <p class="product-desc">Pineapple, mango, ginger, and turmeric for a cleansing tropical escape.</p>
+                            <p class="product-price">$9.49</p>
+                            <a href="./user/login.html" class="btn btn-product">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product 4 -->
+                <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="product-card">
+                        <div class="product-badge">Seasonal</div>
+                        <div class="product-img-container">
+                            <img src="./images/drink-5.jpg" class="product-img" alt="Citrus Sunrise">
+                        </div>
+                        <div class="product-body">
+                            <h3 class="product-title">Citrus Sunrise</h3>
+                            <p class="product-desc">Orange, grapefruit, carrot, and a hint of cayenne for a vibrant boost.</p>
+                            <p class="product-price">$8.25</p>
+                            <a href="./user/login.html" class="btn btn-product">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4" data-aos="fade-up">
+                <a href="products.html" class="btn btn-product" style="max-width: 250px; margin: 0 auto;">View All Products</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== OUR VALUES ========== -->
+    <section class="values-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Our Core Values</h2>
+                <p class="section-subtitle">What makes FoF drinks special</p>
+            </div>
+            <div class="row">
+                <!-- Value 1 -->
+                <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h3 class="value-title">Fresh Ingredients</h3>
+                        <p class="value-text">We source only the freshest, highest quality fruits, vegetables and herbs for maximum flavor and nutrition.</p>
+                    </div>
+                </div>
+                <!-- Value 2 -->
+                <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3 class="value-title">Health Focused</h3>
+                        <p class="value-text">Every drink is crafted to nourish your body while delighting your taste buds. No artificial additives ever.</p>
+                    </div>
+                </div>
+                <!-- Value 3 -->
+                <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3 class="value-title">Creative Recipes</h3>
+                        <p class="value-text">Our mixologists constantly innovate to bring you exciting new flavor combinations you won't find elsewhere.</p>
+                    </div>
+                </div>
+                <!-- Value 4 -->
+                <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-globe-africa"></i>
+                        </div>
+                        <h3 class="value-title">Sustainable Practices</h3>
+                        <p class="value-text">We're committed to eco-friendly packaging and supporting local farmers to reduce our environmental impact.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== TESTIMONIALS ========== -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">What People Say</h2>
+                <p class="section-subtitle">Hear from our happy customers</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">The Green Revive Smoothie has become my morning ritual! It gives me so much energy and tastes amazing. I can't believe something so healthy can be this delicious.</p>
+                        <div class="testimonial-author">
+                            <img src="./images/person-1.jpg" alt="Customer" class="author-img">
+                            <div class="author-info">
+                                <h5>Sarah Johnson</h5>
+                                <p>Dublin, Ireland</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">As someone who doesn't drink alcohol, I'm so grateful for FoF's creative mocktails. The Berry Blast is my favorite - it makes me feel like I'm having a fancy cocktail without the hangover!</p>
+                        <div class="testimonial-author">
+                            <img src="./images/person-2.jpg" alt="Customer" class="author-img">
+                            <div class="author-info">
+                                <h5>Michael Brown</h5>
+                                <p>Lagos, Nigeria</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">I hosted a party and ordered FoF's mocktail catering. Everyone raved about the drinks! The Tropical Fiesta was a huge hit. Best part? No one missed the alcohol.</p>
+                        <div class="testimonial-author">
+                            <img src="./images/person-3.jpg" alt="Customer" class="author-img">
+                            <div class="author-info">
+                                <h5>Amina Mohammed</h5>
+                                <p>Abuja, Nigeria</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CALL TO ACTION ========== -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title" data-aos="fade-up">Ready to Refresh Your Life?</h2>
+            <p class="cta-text" data-aos="fade-up" data-aos-delay="100">
+                Join thousands of happy customers enjoying our premium mocktails and green drinks. Whether you're looking for a healthy boost or delicious non-alcoholic options, we've got you covered.
+            </p>
+            <div data-aos="fade-up" data-aos-delay="200">
+                <a href="./products.html" class="btn btn-cta">Shop Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <a href="index.html" class="footer-logo">FoF</a>
+                    <div class="footer-about">
+                        <p>Flavors of Freshness brings you premium non-alcoholic mocktails and healthy green drinks crafted with the freshest ingredients for vibrant living.</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-5 mb-md-0">
+                    <h5 class="footer-links">Quick Links</h5>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="recipes.html">Recipes</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
+                    <h5 class="footer-contact">Contact Us</h5>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Fresh Street, Dublin, Ireland</p>
+                    <p><i class="fas fa-phone"></i> +234 706 751 0073</p>
+                    <p><i class="fas fa-envelope"></i> orderfof@gmail.com</p>
+                    <p><i class="fas fa-clock"></i> Mon-Fri: 9AM - 9PM, Sat-Sun: 10AM - 8PM</p>
+                </div>
+                <div class="col-lg-3">
+                    <h5 class="footer-newsletter">Newsletter</h5>
+                    <p>Subscribe to get updates on new products, recipes, and special offers.</p>
+                    <form class="newsletter-form">
+                        <input type="email" class="newsletter-input" placeholder="Your email address" required>
+                        <button type="submit" class="newsletter-btn"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <script>document.write(new Date().getFullYear());</script> Flavors of Freshness. All Rights Reserved. Designed by <a href="#">Arbythecoder</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== SCRIPTS ========== -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS (Animate On Scroll)
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Product image zoom effect
+        document.querySelectorAll('.product-img-container').forEach(container => {
+            container.addEventListener('mouseenter', function() {
+                this.querySelector('.product-img').style.transform = 'scale(1.1)';
+            });
+            container.addEventListener('mouseleave', function() {
+                this.querySelector('.product-img').style.transform = 'scale(1)';
+            });
+        });
+
+        // Video hero play/pause on visibility
+        const heroVideo = document.querySelector('.hero-video');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    heroVideo.play();
+                } else {
+                    heroVideo.pause();
+                }
+            });
+        }, { threshold: 0.5 });
+
+observer.observe(heroVideo);
+
+// Load partials
+fetch('partials/navigation.html')
+    .then(response => response.text())
+    .then(data => document.getElementById('nav-container').innerHTML = data);
+
+        fetch('partials/footer.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('footer-container').innerHTML = data);
+
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+    </script>
+</body>
+</html>

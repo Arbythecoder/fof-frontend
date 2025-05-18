@@ -1,0 +1,46 @@
+<!-- Add this before closing body tag -->
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    const response = await fetch('/api/events', {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+      }
+    });
+    
+    if (response.ok) {
+      const { data } = await response.json();
+      const tbody = document.querySelector('table tbody');
+      
+      data.forEach(event => {
+        const row = `
+          <tr>
+            <td>${event._id}</td>
+            <td>${event.eventType}</td>
+            <td>${new Date(event.eventDate).toLocaleDateString()}</td>
+            <td>${event.guests}</td>
+            <td><span class="badge bg-${getStatusColor(event.status)}">${event.status}</span></td>
+            <td>
+              <button class="btn btn-info btn-sm" onclick="editEvent('${event._id}')">Edit</button>
+              <button class="btn btn-danger btn-sm" onclick="deleteEvent('${event._id}')">Delete</button>
+            </td>
+          </tr>
+        `;
+        tbody.insertAdjacentHTML('beforeend', row);
+      });
+    }
+  } catch (error) {
+    console.error('Error loading events:', error);
+  }
+});
+
+function getStatusColor(status) {
+  const colors = {
+    'pending': 'warning',
+    'confirmed': 'success',
+    'cancelled': 'danger',
+    'completed': 'primary'
+  };
+  return colors[status] || 'secondary';
+}
+</script>

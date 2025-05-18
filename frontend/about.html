@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>FoF - Flavors of Freshness</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* Fixed Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9) !important;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+        
+        .navbar.scrolled {
+            background: rgba(255, 26, 26, 0.95) !important;
+        }
+        
+        .navbar-dark .navbar-nav .nav-link {
+            color: rgba(0,0,0,0.8);
+            font-weight: 500;
+        }
+        
+        .navbar-dark.scrolled .navbar-nav .nav-link {
+            color: rgba(255,255,255,0.9);
+        }
+        
+        .navbar-brand {
+            color: #ff1a1a !important;
+            font-weight: 700;
+        }
+        
+         /* Hero Section */
+    .hero-section {
+        height: 80vh;
+        background: url('images/hero-about.jpg') no-repeat center center;
+        background-size: cover;
+        position: relative;
+        margin-top: 80px; /* For fixed navbar */
+    }
+
+    .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center; /* Center content horizontally */
+        text-align: center; /* Center text */
+    }
+
+    .location-badge {
+        background: rgba(255,255,255,0.2);
+        padding: 10px 20px;
+        border-radius: 30px;
+        display: inline-block;
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border: 1px solid rgba(255,255,255,0.1);
+    }
+        
+        /* About Section */
+        .about-section {
+            padding: 100px 0;
+        }
+        
+        .about-img {
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            transition: transform 0.4s ease;
+        }
+        
+        .about-img:hover {
+            transform: scale(1.02);
+        }
+        
+        .founder-quote {
+            font-style: italic;
+            position: relative;
+            padding-left: 30px;
+            border-left: 3px solid #ff1a1a;
+            margin-top: 30px;
+        }
+        
+        /* Stats Section */
+        .stats-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%);
+        }
+        
+        .stat-box {
+            text-align: center;
+            padding: 40px 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            margin-bottom: 30px;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .stat-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        }
+        
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #ff1a1a;
+            margin-bottom: 15px;
+            line-height: 1;
+        }
+        
+        .stat-icon {
+            font-size: 2.5rem;
+            color: #ff1a1a;
+            margin-bottom: 20px;
+        }
+        
+        /* Why Choose Us Section */
+        .features-section {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .feature-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            height: 100%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .feature-img {
+            height: 200px;
+            object-fit: cover;
+            width: 100%;
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: #ff1a1a;
+            margin-bottom: 20px;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #000;
+            color: #fff;
+            padding: 80px 0 40px;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero-section {
+                height: 70vh;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about-section, .features-section, .stats-section {
+                padding: 60px 0;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- FIXED NAVIGATION BAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <img src="images/logo.png" alt="FoF Logo" class="logo me-2" style="height: 40px;">
+                Flavors of Freshness
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+<!-- HERO SECTION WITH STATIC IMAGE -->
+<section class="hero-section">
+    <!-- Background Image -->
+    <img src="./images/bg_5.jpg" alt="About Flavors of Freshness" class="hero-background-img">
+    <div class="hero-overlay"></div>
+    <div class="container">
+        <div class="hero-content text-center text-white">
+            <div class="w-100">
+                <h1 class="display-4 fw-bold mb-3 animate__animated animate__fadeIn">
+                    Our <span style="color: #ff1a1a;">Story</span>
+                </h1>
+                <p class="lead animate__animated animate__fadeIn animate__delay-1s mb-4">
+                    Discover the journey of Flavors of Freshness
+                </p>
+                <p class="lead animate__animated animate__fadeIn animate__delay-1s" style="max-width: 700px; margin: 0 auto;">
+                    From a simple idea to Dublin's favorite mocktails and fresh greens
+                </p>
+                <div class="mt-4 animate__animated animate__fadeIn animate__delay-2s">
+                    <div class="location-badge">
+                        <p class="mb-0" style="font-weight: 600;">Dublin, Ireland</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- ABOUT US SECTION -->
+    <section class="about-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <img src="./images/chef-2.jpg" alt="Our Founder" class="about-img img-fluid">
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="mb-4" style="font-size: 2.5rem; font-weight: bold; color: #ff1a1a;">Our Journey</h2>
+                    <p class="mb-4" style="font-size: 1.1rem; line-height: 1.8;">
+                        Founded in the heart of Dublin in 2020, Flavors of Freshness began as a small passion project by Kemisola Ogunrombi. What started as a weekend market stall serving fresh juice blends has grown into a beloved brand known for its innovative mocktails and fresh, healthy greens.
+                    </p>
+                    <p class="mb-4" style="font-size: 1.1rem; line-height: 1.8;">
+                        We take pride in sourcing the freshest Irish ingredients and creating unique flavor combinations that delight the senses. Each recipe is crafted with care, balancing taste and nutrition to create drinks that are as good for your body as they are delicious.
+                    </p>
+                    <div class="founder-quote">
+                        <p class="mb-3" style="font-size: 1.1rem; line-height: 1.8;">
+                            "Our mission is to bring people together through fresh, flavorful experiences that nourish both body and soul. Every drink we create tells a story of passion, quality, and innovation."
+                        </p>
+                        <p style="font-weight: bold;">— Kemisola Ogunrombi, Founder & CEO</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS SECTION -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="stat-box" id="customerStat">
+                        <div class="stat-icon">
+                            <i class="fa fa-users"></i>
+                        </div>
+                        <div class="stat-number" id="customerCount">0</div>
+                        <h4>Satisfied Customers</h4>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-box" id="monthsStat">
+                        <div class="stat-icon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        <div class="stat-number" id="monthCount">0</div>
+                        <h4>Months in Business</h4>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-box" id="eventsStat">
+                        <div class="stat-icon">
+                            <i class="fa fa-glass"></i>
+                        </div>
+                        <div class="stat-number" id="eventCount">0</div>
+                        <h4>Events Catered</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE US SECTION -->
+    <section class="features-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="mb-3" style="font-size: 2.5rem; font-weight: bold; color: #ff1a1a;">Why Choose FoF?</h2>
+                <p class="lead" style="max-width: 700px; margin: 0 auto;">Discover what makes our mocktails and greens truly special</p>
+            </div>
+            
+            <div class="row g-4">
+                <!-- Feature 1 -->
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <img src="./images/breakfast-5.jpg" alt="Fresh Ingredients" class="feature-img">
+                        <div class="card-body p-4">
+                            <div class="feature-icon">
+                                <i class="fa fa-leaf"></i>
+                            </div>
+                            <h4 class="card-title mb-3">Premium Ingredients</h4>
+                            <p class="card-text">We source only the freshest, highest quality fruits, vegetables and herbs from trusted local suppliers in Ireland.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <img src="./images/bg_3.jpg" alt="Creative Recipes" class="feature-img">
+                        <div class="card-body p-4">
+                            <div class="feature-icon">
+                                <i class="fa fa-lightbulb-o"></i>
+                            </div>
+                            <h4 class="card-title mb-3">Innovative Recipes</h4>
+                            <p class="card-text">Our mixologists create unique flavor combinations you won't find anywhere else, constantly innovating our menu.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <img src="./images/bg_5.jpg" alt="Health Benefits" class="feature-img">
+                        <div class="card-body p-4">
+                            <div class="feature-icon">
+                                <i class="fa fa-heart"></i>
+                            </div>
+                            <h4 class="card-title mb-3">Health Focused</h4>
+                            <p class="card-text">Every drink is crafted with nutrition in mind, using natural sweeteners and packing vitamins and antioxidants.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="mb-4">About FoF</h5>
+                    <p>Flavors of Freshness brings you the finest mocktails and fresh greens in Dublin. Our passion for quality ingredients and innovative flavors sets us apart.</p>
+                    <div class="social-links mt-4">
+                        <a href="#" class="text-white me-3"><i class="fa fa-facebook"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fa fa-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="fa fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="mb-4">Quick Links</h5>
+                    <ul class="footer-links list-unstyled">
+                        <li class="mb-2"><a href="index.html">Home</a></li>
+                        <li class="mb-2"><a href="about.html">About Us</a></li>
+                        <li class="mb-2"><a href="products.html">Our Products</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="mb-4">Newsletter</h5>
+                    <p>Subscribe to get updates on new flavors and special offers.</p>
+                    <form class="mt-3">
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" placeholder="Your Email" required>
+                            <button class="btn btn-danger" type="submit">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr class="mt-5 mb-4" style="border-color: rgba(255,255,255,0.1);">
+            <div class="text-center">
+                <p class="mb-0">Copyright &copy;<script>document.write(new Date().getFullYear());</script> Flavors of Freshness. All rights reserved.</p>
+            </div>
+        </div>
+        <!-- contact -->
+      <!-- Contact Form with Validation -->
+<form id="contactForm" class="mb-4">
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <input type="text" class="form-control" placeholder="Your Name" name="name" required>
+        </div>
+        <div class="col-md-6 mb-3">
+            <input type="email" class="form-control" placeholder="Your Email" name="email" required>
+        </div>
+        <div class="col-12 mb-3">
+            <textarea class="form-control" placeholder="Your Message" name="message" required></textarea>
+        </div>
+        <div class="col-12">
+            <button class="btn btn-danger" type="submit">Send Message</button>
+        </div>
+    </div>
+</form>
+        <!-- Newsletter Subscription -->
+        <form id="newsletterForm" class="mb-4">
+            <div class="input-group">
+                <input type="email" class="form-control" placeholder="Subscribe to our newsletter" required>
+                <button class="btn btn-danger" type="submit">Subscribe</button>
+            </div>
+        </form>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.min.js"></script>
+    
+    <script>
+        // Counter Animation with Waypoints
+        $(document).ready(function(){
+            // Navbar scroll effect
+            $(window).scroll(function(){
+                if($(this).scrollTop() > 100) {
+                    $('.navbar').addClass('scrolled');
+                } else {
+                    $('.navbar').removeClass('scrolled');
+                }
+            });
+            
+            // Initialize counters when stats section comes into view
+            var statsSection = $('.stats-section');
+            var counted = false;
+            
+            $(window).scroll(function() {
+                var scrollPos = $(window).scrollTop();
+                var statsOffset = statsSection.offset().top;
+                var windowHeight = $(window).height();
+                
+                if (scrollPos > (statsOffset - windowHeight + 100) && !counted) {
+                    counted = true;
+                    
+                    // Animate customer count
+                    $('#customerCount').prop('Counter', 0).animate({
+                        Counter: 150
+                    }, {
+                        duration: 2000,
+                        easing: 'swing',
+                        step: function (now) {
+                            $(this).text(Math.ceil(now));
+                        }
+                    });
+                    
+                    // Animate months count
+                    $('#monthCount').prop('Counter', 0).animate({
+                        Counter: 42
+                    }, {
+                        duration: 2500,
+                        easing: 'swing',
+                        step: function (now) {
+                            $(this).text(Math.ceil(now));
+                        }
+                    });
+                    
+                    // Animate events count
+                    $('#eventCount').prop('Counter', 0).animate({
+                        Counter: 87
+                    }, {
+                        duration: 3000,
+                        easing: 'swing',
+                        step: function (now) {
+                            $(this).text(Math.ceil(now));
+                        },
+                        complete: function() {
+                            // Add "+" after animation completes
+                            $(this).text($(this).text() + '+');
+                        }
+                    });
+                    
+                    // Add zoom effect to stat boxes
+                    $('.stat-box').each(function(index) {
+                        var $this = $(this);
+                        setTimeout(function() {
+                            $this.css({
+                                'transform': 'scale(1.05)',
+                                'box-shadow': '0 15px 40px rgba(0,0,0,0.15)'
+                            });
+                            setTimeout(function() {
+                                $this.css({
+                                    'transform': 'scale(1)',
+                                    'box-shadow': '0 10px 30px rgba(0,0,0,0.08)'
+                                });
+                            }, 300);
+                        }, index * 200 + 2000);
+                    });
+                }
+            });
+            
+            // Smooth scrolling for anchor links
+            $('a[href*="#"]').on('click', function(e) {
+                e.preventDefault();
+                
+                $('html, body').animate(
+                    {
+                        scrollTop: $($(this).attr('href')).offset().top - 80,
+                    },
+                    500,
+                    'linear'
+                );
+            });
+        });
+         // Contact Form Submission
+    $('#contactForm').on('submit', function(e) {
+        e.preventDefault();
+        const formData = $(this).serialize();
+
+        $.ajax({
+            url: '/api/contact', // Adjust this to your API endpoint
+            method: 'POST',
+            data: formData,
+            success: function(response) {
+                alert('Message sent successfully!');
+            },
+            error: function() {
+                alert('Error sending message.');
+            }
+        });
+    });
+
+    // Newsletter Subscription
+    $('#newsletterForm').on('submit', function(e) {
+        e.preventDefault();
+        const email = $(this).find('input[type="email"]').val();
+
+        $.ajax({
+            url: '/api/newsletter', // Adjust this to your API endpoint
+            method: 'POST',
+            data: { email: email },
+            success: function(response) {
+                alert('Subscribed successfully!');
+            },
+            error: function() {
+                alert('Error subscribing.');
+            }
+        });
+    });
+    // Contact Form Submission
+$('#contactForm').on('submit', function(e) {
+    e.preventDefault();
+    const formData = $(this).serialize();
+
+    $.ajax({
+        url: '/api/contact', // Ensure this endpoint exists
+        method: 'POST',
+        data: formData,
+        success: function(response) {
+            alert('Message sent successfully!');
+            $('#contactForm')[0].reset(); // Clear the form fields
+        },
+        error: function() {
+            alert('Error sending message. Please try again.');
+        }
+    });
+});
+    </script>
+</body>
+</html>

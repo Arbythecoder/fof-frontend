@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Browse Recipes | FoF Recipes</title>
+    <!-- Shared head content -->
+    <style>
+        .recipe-filter {
+            background: rgba(255,255,255,0.9);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        .recipe-card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            height: 100%;
+        }
+        .recipe-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        .recipe-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(204,0,0,0.9);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+        .recipe-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header/Nav -->
+
+    <section class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1 class="hero-title">Recipe Inspiration</h1>
+            <p class="breadcrumbs">
+                <a href="../index.html">Home</a> 
+                <i class="fa fa-chevron-right"></i> 
+                <a href="../products.html">Products</a> 
+                <i class="fa fa-chevron-right"></i> 
+                <span>Recipe Builder</span>
+            </p>
+        </div>
+    </section>
+
+    <section class="section-padding">
+        <div class="container">
+            <div class="recipe-filter">
+                <div class="row">
+                    <div class="col-md-3">
+                        <select class="form-control">
+                            <option>All Categories</option>
+                            <option>Breakfast</option>
+                            <option>Lunch</option>
+                            <option>Dinner</option>
+                            <option>Drinks</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" placeholder="Search recipes...">
+                    </div>
+                    <div class="col-md-3">
+                        <a href="create.html" class="btn btn-danger btn-block">
+                            <i class="fa fa-plus"></i> Create New
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Recipe 1 -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="recipe-card">
+                        <div class="product-img-container" style="height: 200px;">
+                            <img src="../images/recipe1.jpg" class="product-img" alt="Tropical Smoothie">
+                            <span class="recipe-badge">Drink</span>
+                        </div>
+                        <div class="product-body">
+                            <h3 class="product-title">Tropical Smoothie</h3>
+                            <p class="text-muted">Prep: 10 mins | Servings: 2</p>
+                            <p>Refreshing blend of mango, pineapple and coconut</p>
+                            <div class="recipe-actions">
+                                <a href="preview.html" class="btn btn-sm btn-outline-primary">
+                                    View Recipe
+                                </a>
+                                <button class="btn btn-sm btn-outline-success">
+                                    <i class="fa fa-bookmark"></i> Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recipe 2 -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="recipe-card">
+                        <div class="product-img-container" style="height: 200px;">
+                            <img src="../images/recipe2.jpg" class="product-img" alt="Quinoa Bowl">
+                            <span class="recipe-badge">Lunch</span>
+                        </div>
+                        <div class="product-body">
+                            <h3 class="product-title">Quinoa Power Bowl</h3>
+                            <p class="text-muted">Prep: 15 mins | Servings: 1</p>
+                            <p>Protein-packed quinoa with roasted vegetables</p>
+                            <div class="recipe-actions">
+                                <a href="preview.html" class="btn btn-sm btn-outline-primary">
+                                    View Recipe
+                                </a>
+                                <button class="btn btn-sm btn-outline-success">
+                                    <i class="fa fa-bookmark"></i> Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add more recipe cards -->
+            </div>
+
+            <nav aria-label="Recipe pagination">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">Previous</a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Footer -->
+</body>
+</html>

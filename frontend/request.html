@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Add to existing head -->
+    <style>
+        .invoice-card {
+            border: 1px solid #e9ecef;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        .invoice-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+        .status-badge {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Existing header/nav -->
+
+    <section class="section-padding">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card invoice-card">
+                        <div class="card-body">
+                            <h2 class="card-title text-center mb-4">Request Invoice</h2>
+                            
+                            <form id="invoiceRequestForm">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Event Type</label>
+                                            <select class="form-control" required>
+                                                <option value="">Select Event</option>
+                                                <option value="wedding">Wedding</option>
+                                                <option value="corporate">Corporate</option>
+                                                <!-- Add other event types -->
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Event Date</label>
+                                            <input type="date" class="form-control" required 
+                                                   min="{{ current_date }}">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Number of Guests</label>
+                                    <input type="number" class="form-control" 
+                                           min="10" max="500" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Special Requirements</label>
+                                    <textarea class="form-control" rows="3"
+                                              placeholder="Dietary needs, equipment, etc."></textarea>
+                                </div>
+
+                                <div class="text-center mt-4">
+                                    <button type="submit" class="btn btn-primary btn-lg">
+                                        Generate Quote
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Existing footer -->
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2023 Flavors of Freshness. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('invoiceRequestForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Invoice request submitted successfully!');
+        }); 
+        function getStatusBadge(status) {
+  const statusMap = {
+    paid: { class: 'status-paid', text: 'Paid' },
+    pending: { class: 'status-pending', text: 'Pending' },
+    overdue: { class: 'status-overdue', text: 'Overdue' }
+  };
+  
+  return `<span class="invoice-status ${statusMap[status].class}">
+            ${statusMap[status].text}
+         </span>`;
+}
+document.querySelector('#guestCount').addEventListener('input', function() {
+  const pricePerGuest = 5000; // Example price
+  const total = this.value * pricePerGuest;
+  document.querySelector('#priceEstimate').textContent = 
+    new Intl.NumberFormat('en-NG', { 
+      style: 'currency', 
+      currency: 'NGN' 
+    }).format(total);
+});
+document.getElementById('invoiceRequestForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  if (!this.checkValidity()) {
+    e.stopPropagation();
+    this.classList.add('was-validated');
+    return;
+  }
+  
+  // Submit logic here
+});
+    </script>
+</body>
+</html>

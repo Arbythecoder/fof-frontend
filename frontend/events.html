@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>FoF Recipes - Events Booking</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="css/jquery.timepicker.css">
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Event Showcase Section */
+        .event-showcase {
+            background: #f8f9fa;
+            padding: 60px 0;
+        }
+        
+        .event-card {
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .event-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .event-img {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .event-date {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(204, 0, 0, 0.8);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        
+        .event-details {
+            padding: 25px;
+        }
+        
+        .event-details h3 {
+            color: #cc0000;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .event-meta {
+            display: flex;
+            margin-bottom: 15px;
+            color: #6c757d;
+        }
+        
+        .event-meta span {
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .event-meta i {
+            margin-right: 5px;
+            color: #cc0000;
+        }
+        
+        /* Booking Section */
+        .booking-section {
+            padding: 80px 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/bg_5.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+        
+        .booking-form {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .booking-form h2 {
+            color: #cc0000;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 700;
+        }
+        
+        .form-control {
+            height: 50px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+        
+        .form-control:focus {
+            border-color: #cc0000;
+            box-shadow: 0 0 0 0.2rem rgba(204, 0, 0, 0.25);
+        }
+        
+        textarea.form-control {
+            height: auto;
+        }
+        
+        .btn-booking {
+            background: #cc0000;
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        
+        .btn-booking:hover {
+            background: #a30000;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .login-prompt {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
+        
+        .login-prompt a {
+            color: #cc0000;
+            font-weight: 600;
+        }
+        
+        /* Calendar Styling */
+        .datepicker {
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .datepicker table tr td.active.active, 
+        .datepicker table tr td.active.highlighted.active, 
+        .datepicker table tr td.active.highlighted:active, 
+        .datepicker table tr td.active:active {
+            background-color: #cc0000;
+            background-image: none;
+        }
+        
+        /* Availability Indicator */
+        .availability {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .availability-indicator {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .available {
+            background: #28a745;
+        }
+        
+        .limited {
+            background: #ffc107;
+        }
+        
+        .unavailable {
+            background: #dc3545;
+        }
+        
+        /* Steps Indicator */
+        .booking-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .booking-steps:before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #ddd;
+            z-index: 1;
+        }
+        
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step-number {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #ddd;
+            color: #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .step.active .step-number {
+            background: #cc0000;
+            color: white;
+        }
+        
+        .step-label {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .step.active .step-label {
+            color: #cc0000;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrap">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-12 col-md d-flex align-items-center">
+                <p class="mb-0 phone"><span class="mailus">Phone no:</span> <a href="tel:+2347067510073">+2347067510073</a> or
+                    <span class="mailus">email us:</span> <a href="mailto:orderfof@gmail.com">orderfof@gmail.com</a></p>
+            </div>
+            <div class="col-12 col-md d-flex justify-content-md-end">
+                <p class="mb-0">Mon - Fri / 9:00-21:00, Sat - Sun / 10:00-20:00</p>
+                <div class="social-media">
+                    <p class="mb-0 d-flex">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span
+                                class="fa fa-facebook"></span></a>
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span
+                                class="fa fa-twitter"></span></a>
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span
+                                class="fa fa-instagram"></span></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">FoF <span>Recipes</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+                aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="oi oi-menu"></span> Menu
+        </button>
+        <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="products.html" class="nav-link">Products</a></li>
+                <li class="nav-item active"><a href="events.html" class="nav-link">Events</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- END nav -->
+
+
+
+<!-- Booking Section -->
+<section class="booking-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="booking-form">
+                    <h2>Book Your Private Event</h2>
+                    
+                    <!-- Booking Steps Indicator -->
+                    <div class="booking-steps">
+                        <div class="step active">
+                            <div class="step-number">1</div>
+                            <div class="step-label">Event Details</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-label">Personal Info</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-label">Confirmation</div>
+                        </div>
+                    </div>
+                    
+                    <form id="eventBookingForm">
+                        <div class="form-group">
+                            <label for="eventType">Event Type</label>
+                            <select class="form-control" id="eventType" required>
+                                <option value="" disabled selected>Select event type</option>
+                                <option value="private-dinner">Private Dinner</option>
+                                <option value="cooking-class">Cooking Class</option>
+                                <option value="corporate-event">Corporate Event</option>
+                                <option value="birthday-party">Birthday Party</option>
+                                <option value="wedding">Wedding Reception</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="eventDate">Preferred Date</label>
+                                    <input type="text" class="form-control datepicker" id="eventDate" placeholder="Select date" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="eventTime">Preferred Time</label>
+                                    <select class="form-control" id="eventTime" required>
+                                        <option value="" disabled selected>Select time</option>
+                                        <option value="morning">Morning (9AM-12PM)</option>
+                                        <option value="afternoon">Afternoon (1PM-4PM)</option>
+                                        <option value="evening">Evening (6PM-9PM)</option>
+                                        <option value="custom">Custom Time</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="guestCount">Number of Guests</label>
+                            <input type="number" class="form-control" id="guestCount" min="10" max="100" placeholder="Estimated number of guests" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="eventNotes">Special Requests</label>
+                            <textarea class="form-control" id="eventNotes" rows="3" placeholder="Dietary restrictions, theme preferences, etc."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-booking">Continue Booking</button>
+                        
+                        <div class="login-prompt">
+                            <p>Already have an account? <a href="login.html">Sign in</a> to book faster</p>
+                        </div>
+                    </form>
+                    
+                    <div class="text-center mt-4">
+                        <p>Prefer to speak with someone? Call us at <a href="tel:+2347067510073" class="text-danger">+234 706 751 0073</a></p>
+                        <p>Or email <a href="mailto:events@fofrecipes.com" class="text-danger">events@fofrecipes.com</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="ftco-footer ftco-no-pb ftco-section">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-md-6 col-lg-3">
+                <div class="ftco-footer-widget mb-4">
+                    <h2 class="ftco-heading-2">FoF Recipes</h2>
+                    <p>Our mission is to provide delicious, healthy options with a focus on fresh ingredients.</p>
+                    <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-3">
+                        <li class="ftco-animate"><a href="#"><span class="fa fa-twitter"></span></a></li>
+                        <li class="ftco-animate"><a href="#"><span class="fa fa-facebook"></span></a></li>
+                        <li class="ftco-animate"><a href="#"><span class="fa fa-instagram"></span></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="ftco-footer-widget mb-4">
+                    <h2 class="ftco-heading-2">Open Hours</h2>
+                    <ul class="list-unstyled open-hours">
+                        <li class="d-flex"><span>Monday</span><span>9:00 - 24:00</span></li>
+                        <li class="d-flex"><span>Tuesday</span><span>9:00 - 24:00</span></li>
+                        <li class="d-flex"><span>Wednesday</span><span>9:00 - 24:00</span></li>
+                        <li class="d-flex"><span>Thursday</span><span>9:00 - 24:00</span></li>
+                        <li class="d-flex"><span>Friday</span><span>9:00 - 02:00</span></li>
+                        <li class="d-flex"><span>Saturday</span><span>9:00 - 02:00</span></li>
+                        <li class="d-flex"><span>Sunday</span><span> Closed</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid px-0 bg-primary py-3">
+        <div class="row no-gutters">
+            <div class="col-md-12 text-center">
+                <p class="mb-0">Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                    All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by
+                    <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- loader -->
+<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+    <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
+    <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+            stroke="#F96D00"/>
+</svg></div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery-migrate-3.0.1.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="js/jquery.waypoints.min.js"></script>
+<script src="js/jquery.stellar.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/jquery.animateNumber.min.js"></script>
+<script src="js/bootstrap-datepicker.js"></script>
+<script src="js/jquery.timepicker.min.js"></script>
+<script src="js/scrollax.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&sensor=false"></script>
+<script src="js/google-map.js"></script>
+<script src="js/main.js"></script>
+
+<script>
+    // Initialize datepicker
+    $(document).ready(function(){
+        $('.datepicker').datepicker({
+            format: 'yyyy-mm-dd',
+            startDate: '+1d',
+            daysOfWeekDisabled: "0", // Disable Sundays
+            datesDisabled: ['2023-06-10', '2023-06-15', '2023-06-20'] // Example disabled dates
+        });
+        
+        // Form submission handling
+        $('#eventBookingForm').on('submit', function(e){
+            e.preventDefault();
+            
+            // Here you would typically check if user is logged in
+            // For demo purposes, we'll redirect to login page
+            window.location.href = 'login.html?redirect=events';
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Favorites | FoF Recipes</title>
+    <style>
+        .favorite-item {
+            display: grid;
+            grid-template-columns: 100px 1fr auto;
+            gap: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        .favorite-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <h1>My Favorites</h1>
+        
+        <!-- Active Favorites -->
+        <section id="favorites-list">
+            <div class="favorite-item">
+                <img src="../images/drink-2.jpg" alt="Green Revive Smoothie" width="100">
+                <div>
+                    <h3>Green Revive Smoothie</h3>
+                    <p>€8.99</p>
+                    <p class="stock-status">In Stock</p>
+                </div>
+                <div class="favorite-actions">
+                    <button class="btn-add-to-cart">Add to Cart</button>
+                    <button class="btn-remove">🗑️</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Empty State (Hidden by default) -->
+        <section id="empty-favorites" class="empty-state" style="display:none">
+            <p>You haven't saved any favorites yet</p>
+            <a href="../products.html" class="btn">Browse Recipes</a>
+        </section>
+    </main>
+
+    <script>
+        // Dynamic content loading example
+        document.addEventListener('DOMContentLoaded', () => {
+            const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+            
+            if(favorites.length === 0) {
+                document.getElementById('favorites-list').style.display = 'none';
+                document.getElementById('empty-favorites').style.display = 'block';
+            }
+        });
+// 1. Load favorites from backend API
+const loadFavorites = async () => {
+  try {
+    const response = await fetch('/api/favorites', {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}` // JWT auth
+      }
+    });
+    
+    if (!response.ok) throw new Error('Failed to load');
+    
+    const favorites = await response.json();
+    renderFavorites(favorites); // DOM update function
+    
+  } catch (error) {
+    showEmptyState(); // Show "no favorites" message
+  }
+};
+
+
+const removeFavorite = async (productId) => {
+  await fetch(`/api/favorites/${productId}`, {
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    }
+  });
+  loadFavorites(); // Refresh list
+};
+
+
+document.addEventListener('DOMContentLoaded', loadFavorites);
+
+    </script>
+</body>
+</html>

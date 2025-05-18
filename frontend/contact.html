@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us - FoF | Flavors of Freshness</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <!-- Bootstrap & Custom CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+  <style>
+    :root {
+      --primary: #ff4757;
+      --primary-light: #ff6b81;
+      --dark: #2f3542;
+      --light: #f1f2f6;
+      --success: #2ed573;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f8f9fa;
+      color: var(--dark);
+      padding-top: 70px; /* For fixed navbar */
+    }
+    
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+    }
+    
+    /* Navbar */
+    .navbar {
+      background: rgba(255, 71, 87, 0.95);
+      backdrop-filter: blur(8px);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1050;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+      padding: 8px 0;
+    }
+
+    .navbar-brand {
+      font-size: 1.1rem;
+    }
+
+    .navbar .nav-link {
+      color: #fff;
+      margin: 0 5px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      padding: 8px 12px;
+    }
+
+    .navbar .nav-link:hover,
+    .dropdown-item:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .navbar .nav-item.active .nav-link {
+      background: #fff;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .dropdown-menu {
+      background: #fff;
+      border: none;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .dropdown-item {
+      color: var(--dark);
+      padding: 8px 16px;
+      font-size: 0.9rem;
+    }
+
+    .dropdown-item:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .wrap {
+      padding: 70px 0 10px;
+      background: var(--light);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      font-size: 0.8rem;
+    }
+
+    .logo {
+      width: 35px;
+      height: 35px;
+      transition: transform 0.3s ease;
+    }
+    
+    .logo:hover {
+      transform: rotate(15deg);
+    }
+
+    /* Contact Section */
+    .contact-section {
+      padding: 40px 0;
+      background: url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+      background-size: cover;
+      position: relative;
+    }
+    
+    .contact-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.92);
+    }
+    
+    .contact-container {
+      position: relative;
+      z-index: 1;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      overflow: hidden;
+      margin: 20px 0;
+    }
+    
+    .contact-form {
+      padding: 30px;
+    }
+    
+    .contact-info {
+      padding: 30px;
+      background: var(--primary);
+      color: white;
+      height: 100%;
+    }
+    
+    .contact-info h3 {
+      color: white;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .contact-info h3::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 50px;
+      height: 2px;
+      background: white;
+    }
+    
+    .contact-info p {
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+    }
+    
+    .contact-info .info-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 15px;
+    }
+    
+    .contact-info .info-item i {
+      font-size: 18px;
+      margin-right: 12px;
+      color: white;
+      margin-top: 3px;
+    }
+    
+    .form-control {
+      height: 45px;
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+      padding-left: 15px;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+    }
+    
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 0.25rem rgba(255, 71, 87, 0.25);
+    }
+    
+    textarea.form-control {
+      height: auto;
+      padding-top: 12px;
+      min-height: 120px;
+    }
+    
+    .btn-primary {
+      background: var(--primary);
+      border: none;
+      padding: 10px 25px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+    }
+    
+    .btn-primary:hover {
+      background: var(--primary-light);
+      transform: translateY(-2px);
+    }
+    
+    /* Map */
+    #map {
+      height: 100%;
+      min-height: 300px;
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      background: #f1f2f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .map-fallback {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    /* Responsive */
+    @media (max-width: 991.98px) {
+      .contact-info {
+        border-radius: 0 0 12px 12px;
+      }
+      
+      .contact-form {
+        border-radius: 12px 12px 0 0;
+      }
+      
+      .navbar-brand span {
+        display: none;
+      }
+      
+      .logo {
+        width: 30px;
+        height: 30px;
+      }
+    }
+    
+    @media (max-width: 767.98px) {
+      .wrap {
+        display: none;
+      }
+      
+      body {
+        padding-top: 60px;
+      }
+      
+      .navbar {
+        padding: 5px 0;
+      }
+      
+      .contact-form, .contact-info {
+        padding: 25px;
+      }
+      
+      .contact-info h3 {
+        font-size: 1.3rem;
+      }
+    }
+    
+    /* Animation */
+    .animate-form {
+      animation: fadeInUp 0.8s ease forwards;
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Floating Labels */
+    .form-floating label {
+      color: #6c757d;
+      font-size: 0.9rem;
+    }
+    
+    .form-floating>.form-control:focus~label {
+      color: var(--primary);
+    }
+    
+    .form-floating>.form-control:not(:placeholder-shown)~label {
+      color: #6c757d;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="index.html">
+      <img src="images/logo.png" alt="FoF Logo" class="logo me-2"> 
+      <span class="fw-bold d-none d-lg-inline">Flavors of Freshness</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+      
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+       
+        <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
+        <li class="nav-item"><a class="nav-link" href="recipes.html">Recipes</a></li>
+        <li class="nav-item"><a class="nav-link" href="events.html">Events</a></li>
+        <li class="nav-item active"><a class="nav-link" href="contact.html">Contact</a></li>
+      <li class="nav-item dropdown ms-lg-3">
+                        <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
+                            <li><a class="dropdown-item" href="login.html">Login</a></li>
+                            <li><a class="dropdown-item" href="sign-up.html">Sign Up</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="myprofile.html">My Profile</a></li>
+                        </ul>
+                    </li>
+            
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- CONTACT SECTION -->
+<section class="contact-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <div class="contact-container">
+          <div class="row g-0">
+            <div class="col-lg-7">
+              <div class="contact-form animate__animated animate__fadeIn">
+                <h2 class="mb-3 fw-bold">Get in Touch</h2>
+                <p class="mb-4">Have questions about our mocktails or fresh greens? Send us a message and we'll get back to you within 24 hours.</p>
+                
+                <form id="contactForm" action="https://formspree.io/f/your-form-id" method="POST">
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
+                        <label for="name">Your Name</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required>
+                        <label for="email">Your Email</label>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required>
+                    <label for="subject">Subject</label>
+                  </div>
+                  
+                  <div class="form-floating mb-4">
+                    <textarea class="form-control" id="message" name="message" placeholder="Your Message" style="height: 150px" required></textarea>
+                    <label for="message">Your Message</label>
+                  </div>
+                  
+                  <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-paper-plane me-2"></i> Send Message
+                  </button>
+                  
+                  <div id="formSuccess" class="alert alert-success mt-3 d-none">
+                    Thank you! Your message has been sent successfully.
+                  </div>
+                </form>
+              </div>
+            </div>
+            
+            <div class="col-lg-5">
+              <div class="contact-info animate__animated animate__fadeIn">
+                <h3 class="fw-bold">Contact Information</h3>
+                <p>We'd love to hear from you! Whether you have questions about our products, want to place a custom order, or just want to say hello.</p>
+                
+                <div class="info-item">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <div>
+                    <h5 class="fw-bold mb-1">Our Location</h5>
+                    <p>123 Fresh Street, Dublin 2, Ireland</p>
+                  </div>
+                </div>
+                
+                <div class="info-item">
+                  <i class="fas fa-envelope"></i>
+                  <div>
+                    <h5 class="fw-bold mb-1">Email Us</h5>
+                    <p>orderfof@gmail.com</p>
+                  </div>
+                </div>
+                
+                <div class="info-item">
+                  <i class="fas fa-phone-alt"></i>
+                  <div>
+                    <h5 class="fw-bold mb-1">Call Us</h5>
+                    <p>+234 706 751 0073</p>
+                  </div>
+                </div>
+                
+                <div class="info-item">
+                  <i class="fas fa-clock"></i>
+                  <div>
+                    <h5 class="fw-bold mb-1">Opening Hours</h5>
+                    <p>Monday - Friday: 9am - 6pm<br>Saturday: 10am - 4pm</p>
+                  </div>
+                </div>
+                
+                <div class="mt-4">
+                  <h5 class="fw-bold mb-3">Follow Us</h5>
+                  <div class="social-links">
+                    <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-lg"></i></a>
+                    <a href="#" class="text-white me-3"><i class="fab fa-facebook-f fa-lg"></i></a>
+                    <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                    <a href="#" class="text-white"><i class="fab fa-tiktok fa-lg"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP SECTION -->
+<section class="py-4 bg-light">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <h2 class="text-center mb-4 fw-bold">Find Us in Dublin</h2>
+        <div id="map">
+          <!-- Fallback map image -->
+          <img src="https://maps.googleapis.com/maps/api/staticmap?center=Dublin,Ireland&zoom=13&size=1200x400&maptype=roadmap&markers=color:red%7CDublin,Ireland&key=AIzaSyD9FkF2Q8q3q3q3q3q3q3q3q3q3q3q3q3q" 
+               alt="Dublin Map" 
+               class="map-fallback w-100">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JS Scripts -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  // Form submission handling
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // In a real implementation, you would send the form data to your backend
+    // For demo purposes, we'll just show a success message
+    const formSuccess = document.getElementById('formSuccess');
+    formSuccess.classList.remove('d-none');
+    
+    // Reset form
+    this.reset();
+    
+    // Scroll to success message
+    formSuccess.scrollIntoView({ behavior: 'smooth' });
+    
+    // Hide success message after 5 seconds
+    setTimeout(() => {
+      formSuccess.classList.add('d-none');
+    }, 5000);
+  });
+  
+  // Initialize Google Map if API is available
+  if (typeof google !== 'undefined') {
+    function initMap() {
+      // Dublin coordinates
+      const dublin = { lat: 53.349805, lng: -6.26031 };
+      
+      // Create map centered on Dublin
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 14,
+        center: dublin,
+        styles: [
+          {
+            "featureType": "all",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              { "color": "#ffffff" }
+            ]
+          },
+          {
+            "featureType": "all",
+            "elementType": "labels.text.stroke",
+            "stylers": [
+              { "visibility": "on" },
+              { "color": "#3e606f" },
+              { "weight": 2 },
+              { "gamma": 0.84 }
+            ]
+          },
+          {
+            "featureType": "all",
+            "elementType": "labels.icon",
+            "stylers": [
+              { "visibility": "off" }
+            ]
+          },
+          {
+            "featureType": "administrative",
+            "elementType": "geometry",
+            "stylers": [
+              { "weight": 0.6 },
+              { "color": "#1a3541" }
+            ]
+          },
+          {
+            "featureType": "landscape",
+            "elementType": "geometry",
+            "stylers": [
+              { "color": "#2c5a71" }
+            ]
+          },
+          {
+            "featureType": "poi",
+            "elementType": "geometry",
+            "stylers": [
+              { "color": "#406d80" }
+            ]
+          },
+          {
+            "featureType": "poi.park",
+            "elementType": "geometry",
+            "stylers": [
+              { "color": "#2c5a71" }
+            ]
+          },
+          {
+            "featureType": "road",
+            "elementType": "geometry",
+            "stylers": [
+              { "color": "#29768a" },
+              { "lightness": -37 }
+            ]
+          },
+          {
+            "featureType": "transit",
+            "elementType": "geometry",
+            "stylers": [
+              { "color": "#406d80" }
+            ]
+          },
+          {
+            "featureType": "water",
+            "elementType": "geometry",
+            "stylers": [
+              { "color": "#193341" }
+            ]
+          }
+        ]
+      });
+      
+      // Add marker
+      new google.maps.Marker({
+        position: dublin,
+        map: map,
+        title: "Flavors of Freshness Dublin",
+        icon: {
+          url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png"
+        }
+      });
+    }
+    
+    // Call the initMap function
+    initMap();
+  }
+</script>
+
+</body>
+</html>

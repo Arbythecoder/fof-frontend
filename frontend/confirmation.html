@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoF Recipes - Shipping Information</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-red: #cc0000;
+            --dark-red: #a30000;
+            --light-red: #ff3333;
+            --pure-white: #ffffff;
+            --off-white: #f8f9fa;
+            --dark-black: #212529;
+            --light-black: #343a40;
+            --text-gray: #6c757d;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f7fa;
+            color: var(--dark-black);
+        }
+
+        .checkout-header {
+            background-color: var(--pure-white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 15px 0;
+        }
+
+        .checkout-logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-red);
+        }
+
+        .checkout-progress {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px 0 40px;
+            position: relative;
+        }
+
+        .checkout-progress:before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: #e9ecef;
+            z-index: 1;
+        }
+
+        .progress-step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .progress-step.active .step-number {
+            background-color: var(--primary-red);
+            color: var(--pure-white);
+            border-color: var(--primary-red);
+        }
+
+        .progress-step.completed .step-number {
+            background-color: var(--pure-white);
+            color: var(--primary-red);
+            border-color: var(--primary-red);
+        }
+
+        .progress-step.active .step-label,
+        .progress-step.completed .step-label {
+            color: var(--primary-red);
+            font-weight: 500;
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: var(--pure-white);
+            border: 2px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-gray);
+        }
+
+        .step-label {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+        }
+
+        .checkout-card {
+            background-color: var(--pure-white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .checkout-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--dark-black);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .checkout-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-red);
+        }
+
+        .form-label {
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--light-black);
+        }
+
+        .form-control {
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-red);
+            box-shadow: 0 0 0 0.25rem rgba(204,0,0,0.15);
+        }
+
+        .btn-checkout {
+            background-color: var(--primary-red);
+            color: var(--pure-white);
+            border: none;
+            padding: 12px 25px;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .btn-checkout:hover {
+            background-color: var(--dark-red);
+            color: var(--pure-white);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(204,0,0,0.2);
+        }
+
+        .btn-outline-checkout {
+            border: 1px solid var(--primary-red);
+            color: var(--primary-red);
+            background-color: transparent;
+            padding: 12px 25px;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .btn-outline-checkout:hover {
+            background-color: var(--primary-red);
+            color: var(--pure-white);
+        }
+
+        .order-summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #f1f1f1;
+        }
+
+        .order-summary-item:last-child {
+            border-bottom: none;
+        }
+
+        .order-summary-total {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--dark-black);
+        }
+
+        .product-thumbnail {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .saved-address {
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .saved-address:hover {
+            border-color: var(--primary-red);
+            background-color: rgba(204,0,0,0.03);
+        }
+
+        .saved-address.selected {
+            border-color: var(--primary-red);
+            background-color: rgba(204,0,0,0.05);
+        }
+
+        .saved-address .form-check-input {
+            margin-top: 0.3em;
+        }
+
+        .saved-address .form-check-input:checked {
+            background-color: var(--primary-red);
+            border-color: var(--primary-red);
+        }
+
+        @media (max-width: 768px) {
+            .checkout-progress {
+                flex-wrap: wrap;
+            }
+            
+            .progress-step {
+                width: 50%;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Checkout Header -->
+    <header class="checkout-header">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <a href="../index.html" class="checkout-logo">
+                    <i class="fas fa-leaf me-2"></i>FoF Recipes
+                </a>
+                <div class="text-end">
+                    <a href="../cart.html" class="text-muted small"><i class="fas fa-chevron-left me-1"></i> Back to Cart</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container my-5">
+        <!-- Checkout Progress -->
+        <div class="checkout-progress">
+            <div class="progress-step active">
+                <div class="step-number">1</div>
+                <div class="step-label">Shipping</div>
+            </div>
+            <div class="progress-step">
+                <div class="step-number">2</div>
+                <div class="step-label">Payment</div>
+            </div>
+            <div class="progress-step">
+                <div class="step-number">3</div>
+                <div class="step-label">Confirmation</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Shipping Form -->
+            <div class="col-lg-8">
+                <div class="checkout-card">
+                    <h2 class="checkout-title">Shipping Information</h2>
+                    
+                    <!-- Saved Addresses -->
+                    <div class="mb-4">
+                        <h5 class="mb-3">Saved Addresses</h5>
+                        <div class="saved-address selected">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="savedAddress" id="address1" checked>
+                                <label class="form-check-label" for="address1">
+                                    <strong>Home</strong> - 123 Fresh Street, Dublin, D02 XY34, Ireland
+                                </label>
+                            </div>
+                        </div>
+                        <div class="saved-address">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="savedAddress" id="address2">
+                                <label class="form-check-label" for="address2">
+                                    <strong>Work</strong> - 456 Business Avenue, Dublin, D04 AB56, Ireland
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- New Address Form (shown when "Add New Address" is clicked) -->
+                    <div id="newAddressForm" style="display: none;">
+                        <form id="shippingForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName" class="form-label">First Name</label>
+                                    <input type="text" class="form-control" id="firstName" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="lastName" class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" id="lastName" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="address" class="form-label">Address</label>
+                                <input type="text" class="form-control" id="address" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="address2" class="form-label">Apartment, Suite, etc. (Optional)</label>
+                                <input type="text" class="form-control" id="address2">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="city" class="form-label">City</label>
+                                    <input type="text" class="form-control" id="city" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="state" class="form-label">State/Province</label>
+                                    <select class="form-select" id="state" required>
+                                        <option value="" selected disabled>Select</option>
+                                        <option>Dublin</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="zip" class="form-label">ZIP/Postal Code</label>
+                                    <input type="text" class="form-control" id="zip" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="country" class="form-label">Country</label>
+                                    <select class="form-select" id="country" required>
+                                        <option value="Ireland" selected>Ireland</option>
+                                        <option value="UK">United Kingdom</option>
+                                        <option value="US">United States</option>
+                                        <!-- More countries would be added here -->
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" id="phone" required>
+                            </div>
+                            <div class="form-check mb-4">
+                                <input class="form-check-input" type="checkbox" id="saveAddress">
+                                <label class="form-check-label" for="saveAddress">
+                                    Save this address for future use
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+
+                    <button type="button" class="btn btn-outline-checkout mb-4" id="toggleAddressForm">
+                        <i class="fas fa-plus me-2"></i>Add New Address
+                    </button>
+
+                    <!-- Shipping Method -->
+                    <div class="mt-4">
+                        <h5 class="mb-3">Shipping Method</h5>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="radio" name="shippingMethod" id="standardShipping" checked>
+                            <label class="form-check-label" for="standardShipping">
+                                <strong>Standard Delivery</strong> - €4.99 (3-5 business days)
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="shippingMethod" id="expressShipping">
+                            <label class="form-check-label" for="expressShipping">
+                                <strong>Express Delivery</strong> - €9.99 (1-2 business days)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="../cart.html" class="btn btn-outline-checkout">
+                        <i class="fas fa-chevron-left me-2"></i>Back to Cart
+                    </a>
+                    <a href="payment.html" class="btn btn-checkout">
+                        Continue to Payment<i class="fas fa-chevron-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="col-lg-4">
+                <div class="checkout-card">
+                    <h2 class="checkout-title">Your Order</h2>
+                    
+                    <!-- Product List -->
+                    <div class="mb-4">
+                        <div class="d-flex mb-3">
+                            <img src="../images/drink-2.jpg" class="product-thumbnail me-3">
+                            <div>
+                                <h6 class="mb-1">Green Revive Smoothie</h6>
+                                <p class="text-muted small mb-1">Size: Regular</p>
+                                <p class="mb-0">€8.99 × 2</p>
+                            </div>
+                        </div>
+                        <div class="d-flex mb-3">
+                            <img src="../images/mocktails1.jpg" class="product-thumbnail me-3">
+                            <div>
+                                <h6 class="mb-1">Berry Blast Mocktail</h6>
+                                <p class="text-muted small mb-1">Size: Large</p>
+                                <p class="mb-0">€7.99 × 1</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Order Summary -->
+                    <div class="mb-3">
+                        <div class="order-summary-item">
+                            <span>Subtotal</span>
+                            <span>€25.97</span>
+                        </div>
+                        <div class="order-summary-item">
+                            <span>Shipping</span>
+                            <span>€4.99</span>
+                        </div>
+                        <div class="order-summary-item">
+                            <span>Tax</span>
+                            <span>€3.11</span>
+                        </div>
+                        <div class="order-summary-item order-summary-total">
+                            <span>Total</span>
+                            <span>€34.07</span>
+                        </div>
+                    </div>
+
+                    <!-- Promo Code -->
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Promo Code">
+                        <button class="btn btn-outline-secondary" type="button">Apply</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Toggle between saved addresses and new address form
+        document.getElementById('toggleAddressForm').addEventListener('click', function() {
+            const form = document.getElementById('newAddressForm');
+            const savedAddresses = document.querySelectorAll('.saved-address');
+            
+            if (form.style.display === 'none') {
+                form.style.display = 'block';
+                this.innerHTML = '<i class="fas fa-times me-2"></i>Cancel';
+                savedAddresses.forEach(addr => {
+                    addr.classList.remove('selected');
+                    addr.querySelector('input').checked = false;
+                });
+            } else {
+                form.style.display = 'none';
+                this.innerHTML = '<i class="fas fa-plus me-2"></i>Add New Address';
+            }
+        });
+
+        // Select saved address
+        document.querySelectorAll('.saved-address').forEach(address => {
+            address.addEventListener('click', function(e) {
+                if (e.target.tagName !== 'INPUT') {
+                    const radio = this.querySelector('input');
+                    radio.checked = true;
+                    
+                    document.querySelectorAll('.saved-address').forEach(addr => {
+                        addr.classList.remove('selected');
+                    });
+                    
+                    this.classList.add('selected');
+                    document.getElementById('newAddressForm').style.display = 'none';
+                    document.getElementById('toggleAddressForm').innerHTML = '<i class="fas fa-plus me-2"></i>Add New Address';
+                }
+            });
+        });
+
+        // Backend integration points:
+        // 1. Form submission should POST to /api/checkout/shipping
+        // 2. Saved addresses should be fetched from /api/user/addresses
+        // 3. Shipping methods should be fetched from /api/shipping/methods
+    </script>
+</body>
+</html>

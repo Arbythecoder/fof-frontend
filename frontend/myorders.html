@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders | FoF Recipes</title>
+    <style>
+        .order-card {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .order-status {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+        .status-delivered { background: #e6f7ee; color: #00a65a; }
+        .status-processing { background: #fff8e6; color: #f39c12; }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <h1>Order History</h1>
+        
+        <div class="order-card">
+            <div class="order-header">
+                <span>Order #F10025</span>
+                <span class="order-status status-delivered">Delivered</span>
+                <span style="float:right">€34.07</span>
+            </div>
+            <p>Placed on 15 June 2023</p>
+            
+            <div class="order-items">
+                <div>2 × Green Revive Smoothie</div>
+                <div>1 × Berry Blast Mocktail</div>
+            </div>
+            
+            <button class="btn-reorder">Reorder</button>
+            <button class="btn-track">Track</button>
+        </div>
+    </main>
+
+    <script>
+        // Example: Load orders from API
+        fetch('/api/orders')
+            .then(res => res.json())
+            .then(orders => {
+                // Render orders dynamically
+            });
+    </script>
+</body>
+</html>
