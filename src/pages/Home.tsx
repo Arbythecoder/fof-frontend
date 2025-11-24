@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import Newsletter from '../components/Newsletter';
 
 const Home = () => {
   // Animation variants
@@ -26,20 +27,13 @@ const Home = () => {
     <div className="overflow-hidden">
       {/* Hero Section - Premium Video Background */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Video Background */}
+        {/* Background Image */}
         <div className="absolute inset-0 w-full h-full overflow-hidden">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
+          <img
+            src="https://images.unsplash.com/photo-1622597467836-f3285f2131b8?w=1920&h=1080&fit=crop"
+            alt="Fresh healthy drinks"
             className="absolute inset-0 w-full h-full object-cover"
-            poster="/images/hero-poster.jpg"
-          >
-            <source src="/videos/hero-background.mp4" type="video/mp4" />
-            <source src="/videos/hero-background.webm" type="video/webm" />
-            {/* Fallback for browsers that don't support video */}
-          </video>
+          />
 
           {/* Video Overlay - Gradient for readability */}
           <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/50 to-black/60"></div>
@@ -326,6 +320,105 @@ const Home = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* Featured Products Section */}
+      <section className="section-padding bg-cream-bg">
+        <div className="container-fof">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+            className="text-center mb-12"
+          >
+            <motion.h2
+              variants={fadeInUp}
+              className="text-4xl md:text-5xl font-heading font-bold mb-4"
+            >
+              Our <span className="text-gradient">Bestsellers</span>
+            </motion.h2>
+            <motion.p variants={fadeInUp} className="text-lg text-gray-600">
+              Discover our most loved drinks and salads
+            </motion.p>
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
+            {[
+              {
+                name: 'Tropical Paradise',
+                price: '6.99',
+                image: 'https://images.unsplash.com/photo-1546171753-97d7676e4602?w=400&h=500&fit=crop',
+                category: 'Mocktail',
+              },
+              {
+                name: 'Green Goddess Salad',
+                price: '8.99',
+                image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=500&fit=crop',
+                category: 'Salad',
+              },
+              {
+                name: 'Berry Bliss',
+                price: '5.99',
+                image: 'https://images.unsplash.com/photo-1497534446932-c925b458314e?w=400&h=500&fit=crop',
+                category: 'Mocktail',
+              },
+            ].map((product, index) => (
+              <motion.div
+                key={index}
+                variants={fadeInUp}
+                className="card overflow-hidden group cursor-pointer"
+              >
+                <div className="relative h-64 overflow-hidden">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute top-4 left-4">
+                    <span className="px-3 py-1 bg-gold-primary text-white text-sm font-medium rounded-full">
+                      {product.category}
+                    </span>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-heading font-semibold mb-2">{product.name}</h3>
+                  <div className="flex items-center justify-between">
+                    <span className="text-2xl font-bold text-gold-primary">${product.price}</span>
+                    <button className="btn-primary py-2 px-4 text-sm">Add to Cart</button>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <motion.div
+            variants={fadeInUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="text-center mt-12"
+          >
+            <Link
+              to="/products"
+              className="btn-outline inline-flex items-center"
+            >
+              View All Products
+              <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Newsletter Section */}
+      <Newsletter />
 
       {/* CTA Section */}
       <section className="section-padding bg-gradient-to-r from-gold-primary to-green-primary text-white">

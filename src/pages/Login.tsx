@@ -1,11 +1,12 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 import { useAuth } from '../contexts/AuthContext';
 
 const Login = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { login } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
@@ -23,9 +24,11 @@ const Login = () => {
     try {
       console.log('Login: Attempting to login with email:', formData.email);
       await login(formData.email, formData.password);
-      console.log('Login: Success! Navigating to home...');
-      // Redirect to home page on success
-      navigate('/');
+      console.log('Login: Success! Navigating...');
+
+      // Redirect to the original page if redirect param exists, otherwise home
+      const redirectTo = searchParams.get('redirect') || '/';
+      navigate(redirectTo);
     } catch (err: any) {
       console.error('Login: Error occurred:', err);
       console.error('Login: Error response:', err?.response);

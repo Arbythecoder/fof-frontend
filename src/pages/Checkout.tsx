@@ -1,14 +1,17 @@
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCartStore } from '../store/cartStore';
+import { useAuth } from '../contexts/AuthContext';
 
 const Checkout = () => {
   const navigate = useNavigate();
   const { items, getTotal, clearCart } = useCartStore();
+  const { user } = useAuth();
 
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [loading, setLoading] = useState(false);
+  const [postcodeError, setPostcodeError] = useState('');
 
   // Form state
   const [shippingInfo, setShippingInfo] = useState({
@@ -23,8 +26,29 @@ const Checkout = () => {
 
   const [paymentMethod, setPaymentMethod] = useState<'card' | 'paypal'>('card');
 
+  // Redirect to login if not authenticated
+  useEffect(() => {
+    if (!user) {
+      navigate('/login?redirect=/checkout');
+    }
+  }, [user, navigate]);
+
+  // UK Postcode validation (formats: SW1A 1AA, E1 6AN, etc.)
+  const validateUKPostcode = (postcode: string): boolean => {
+    const ukPostcodeRegex = /^[A-Z]{1,2}\d{1,2}[A-Z]?\s?\d[A-Z]{2}$/i;
+    return ukPostcodeRegex.test(postcode.trim());
+  };
+
   const handleShippingSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Validate UK postcode
+    if (!validateUKPostcode(shippingInfo.postcode)) {
+      setPostcodeError('Please enter a valid UK postcode (e.g., SW1A 1AA)');
+      return;
+    }
+
+    setPostcodeError('');
     setStep(2);
   };
 
@@ -180,15 +204,22 @@ const Checkout = () => {
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Postcode *
+                        UK Postcode *
                       </label>
                       <input
                         type="text"
                         required
-                        className="input-field"
+                        placeholder="e.g., SW1A 1AA"
+                        className={`input-field ${postcodeError ? 'border-red-500' : ''}`}
                         value={shippingInfo.postcode}
-                        onChange={(e) => setShippingInfo({ ...shippingInfo, postcode: e.target.value })}
+                        onChange={(e) => {
+                          setShippingInfo({ ...shippingInfo, postcode: e.target.value.toUpperCase() });
+                          setPostcodeError('');
+                        }}
                       />
+                      {postcodeError && (
+                        <p className="text-red-500 text-sm mt-1">{postcodeError}</p>
+                      )}
                     </div>
                   </div>
 
