@@ -7,7 +7,7 @@ import { AuthProvider } from './contexts/AuthContext'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter basename="/fof-frontend">
+    <BrowserRouter>
       <AuthProvider>
         <App />
       </AuthProvider>
