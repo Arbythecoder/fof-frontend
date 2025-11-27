@@ -441,6 +441,9 @@ const Checkout = () => {
             <div className="card p-12">
               <div className="text-6xl mb-6">🎉</div>
               <h2 className="text-3xl font-heading font-bold mb-4">Order Confirmed!</h2>
+              <p className="text-gray-600 mb-2">
+                Welcome, <strong className="text-gold-primary">{shippingInfo.fullName}</strong>! 🎉
+              </p>
               <p className="text-gray-600 mb-8">
                 Thank you for your order! We've sent a confirmation email to{' '}
                 <strong>{shippingInfo.email}</strong>
