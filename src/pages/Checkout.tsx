@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCartStore } from '../store/cartStore';
 import { useAuth } from '../contexts/AuthContext';
+import axios from 'axios';
+import PayPalButton from '../components/checkout/PayPalButton';
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -12,6 +14,8 @@ const Checkout = () => {
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [loading, setLoading] = useState(false);
   const [postcodeError, setPostcodeError] = useState('');
+  const [orderId, setOrderId] = useState<string>('');
+  const [paymentError, setPaymentError] = useState('');
 
   // Form state
   const [shippingInfo, setShippingInfo] = useState({
@@ -39,7 +43,7 @@ const Checkout = () => {
     return ukPostcodeRegex.test(postcode.trim());
   };
 
-  const handleShippingSubmit = (e: React.FormEvent) => {
+  const handleShippingSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     // Validate UK postcode
@@ -49,22 +53,79 @@ const Checkout = () => {
     }
 
     setPostcodeError('');
-    setStep(2);
+    setLoading(true);
+
+    try {
+      // Create order in backend
+      const token = localStorage.getItem('token');
+      const apiUrl = import.meta.env.VITE_API_URL;
+
+      const orderData = {
+        orderItems: items.map(item => ({
+          product: item.product._id,
+          name: item.product.name,
+          quantity: item.quantity,
+          price: item.product.salePrice || item.product.price,
+          image: item.product.thumbnail || item.product.images[0]
+        })),
+        shippingAddress: {
+          fullName: shippingInfo.fullName,
+          address: shippingInfo.address,
+          city: shippingInfo.city,
+          postcode: shippingInfo.postcode,
+          phone: shippingInfo.phone
+        },
+        paymentMethod: 'pending',
+        itemsPrice: getTotal(),
+        shippingPrice: 0,
+        totalPrice: getTotal()
+      };
+
+      const { data } = await axios.post(
+        `${apiUrl}/api/orders`,
+        orderData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+
+      setOrderId(data.data.order._id);
+      setStep(2);
+    } catch (error: any) {
+      console.error('Error creating order:', error);
+      alert(error.response?.data?.message || 'Failed to create order. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handlePaymentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // For PayPal, user will use the PayPal button instead
+    if (paymentMethod === 'paypal') {
+      return;
+    }
+
+    // For card payments (simulated for now)
     setLoading(true);
-
-    // Simulate order processing
     await new Promise(resolve => setTimeout(resolve, 2000));
-
-    // Clear cart immediately after successful order
     clearCart();
-
-    // Go to step 3 (confirmation)
     setStep(3);
     setLoading(false);
+  };
+
+  const handlePayPalSuccess = () => {
+    clearCart();
+    setStep(3);
+  };
+
+  const handlePayPalError = (error: string) => {
+    setPaymentError(error);
+    alert(`Payment failed: ${error}`);
   };
 
   const handleOrderComplete = () => {
@@ -372,6 +433,29 @@ const Checkout = () => {
                     </div>
                   )}
 
+                  {paymentMethod === 'paypal' && orderId && (
+                    <div className="space-y-4 pt-4">
+                      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-sm">
+                        <p className="text-blue-800 mb-2">
+                          <strong>💳 Pay with PayPal Sandbox (Test Mode)</strong>
+                        </p>
+                        <p className="text-blue-600 text-xs">
+                          This is a test payment. No real money will be charged.
+                        </p>
+                      </div>
+                      <PayPalButton
+                        orderId={orderId}
+                        onSuccess={handlePayPalSuccess}
+                        onError={handlePayPalError}
+                      />
+                      {paymentError && (
+                        <div className="bg-red-50 border border-red-200 rounded-lg p-3 text-sm text-red-600">
+                          {paymentError}
+                        </div>
+                      )}
+                    </div>
+                  )}
+
                   <div className="flex gap-4 pt-4">
                     <button
                       type="button"
@@ -380,13 +464,15 @@ const Checkout = () => {
                     >
                       Back
                     </button>
-                    <button
-                      type="submit"
-                      disabled={loading}
-                      className="btn-primary flex-1"
-                    >
-                      {loading ? 'Processing...' : 'Place Order'}
-                    </button>
+                    {paymentMethod === 'card' && (
+                      <button
+                        type="submit"
+                        disabled={loading}
+                        className="btn-primary flex-1"
+                      >
+                        {loading ? 'Processing...' : 'Place Order'}
+                      </button>
+                    )}
                   </div>
                 </form>
               </div>
