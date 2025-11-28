@@ -11,30 +11,37 @@ const Products = () => {
   const [selectedFilter, setSelectedFilter] = useState<DeliveryType | 'all'>('all');
 
   const handleAddToCart = (product: ProductData) => {
-    // Convert ProductData to Product type for cart
-    const cartProduct: Product = {
-      _id: String(product.id),
-      name: product.name,
-      description: product.description,
-      price: product.price,
-      salePrice: product.salePrice,
-      category: product.category,
-      deliveryType: product.deliveryType,
-      images: [product.image], // Convert single image to array
-      thumbnail: product.image,
-      ingredients: [], // Sample data doesn't have these
-      allergens: [],
-      dietary: [],
-      inStock: true,
-      featured: product.badge === 'popular',
-      rating: product.rating,
-      reviewCount: product.reviews,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    };
+    try {
+      // Convert ProductData to Product type for cart
+      const cartProduct: Product = {
+        _id: String(product.id),
+        name: product.name,
+        description: product.description,
+        price: product.price,
+        salePrice: product.salePrice,
+        category: product.category,
+        deliveryType: product.deliveryType,
+        images: [product.image], // Convert single image to array
+        thumbnail: product.image,
+        ingredients: [], // Sample data doesn't have these
+        allergens: [],
+        dietary: [],
+        inStock: true,
+        featured: product.badge === 'popular',
+        rating: product.rating,
+        reviewCount: product.reviews,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
 
-    addToCart(cartProduct, 1);
-    openCart();
+      console.log('Adding to cart:', cartProduct.name);
+      addToCart(cartProduct, 1);
+      openCart();
+      console.log('✅ Added to cart successfully!');
+    } catch (error) {
+      console.error('❌ Error adding to cart:', error);
+      alert('Failed to add item to cart. Please try again.');
+    }
   };
 
   const filteredProducts = selectedFilter === 'all'

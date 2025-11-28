@@ -3,6 +3,7 @@ import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import CartDrawer from './components/cart/CartDrawer';
 import ChristmasNotice from './components/banners/ChristmasNotice';
+import ScrollToTop from './components/common/ScrollToTop';
 import Home from './pages/Home';
 import Products from './pages/Products';
 import About from './pages/About';
@@ -19,6 +20,7 @@ import Admin from './pages/Admin';
 function App() {
   return (
     <div className="flex flex-col min-h-screen">
+      <ScrollToTop />
       <ChristmasNotice />
       <Header />
 
