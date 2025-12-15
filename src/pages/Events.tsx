@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import BackToTop from '../components/common/BackToTop';
 
 const Events = () => {
   const [formData, setFormData] = useState({
@@ -21,6 +23,21 @@ const Events = () => {
     // TODO: Connect to backend API
     console.log('Event booking submitted:', formData);
     setIsSubmitted(true);
+
+    // Reset form after successful submission
+    setFormData({
+      contactName: '',
+      contactEmail: '',
+      contactPhone: '',
+      eventType: 'wedding',
+      eventDate: '',
+      eventTime: '',
+      guestCount: '',
+      location: '',
+      specialRequests: '',
+    });
+
+    // Hide success message after 5 seconds
     setTimeout(() => setIsSubmitted(false), 5000);
   };
 
@@ -400,16 +417,18 @@ const Events = () => {
               Our events team is here to help plan your perfect celebration
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="/contact" className="inline-block bg-white text-gold-primary font-semibold px-8 py-4 rounded-fof hover:shadow-2xl transition-all duration-300">
+              <Link to="/contact" className="inline-block bg-white text-gold-primary font-semibold px-8 py-4 rounded-fof hover:shadow-2xl transition-all duration-300">
                 Contact Us
-              </a>
-              <a href="tel:+44xxxxxxxxxx" className="inline-block border-2 border-white text-white font-semibold px-8 py-4 rounded-fof hover:bg-white hover:text-gold-primary transition-all duration-300">
-                Call Now
+              </Link>
+              <a href="tel:+447700900000" className="inline-block border-2 border-white text-white font-semibold px-8 py-4 rounded-fof hover:bg-white hover:text-gold-primary transition-all duration-300">
+                📞 Call Now
               </a>
             </div>
           </motion.div>
         </div>
       </section>
+      {/* Back to Top Button */}
+      <BackToTop />
     </div>
   );
 };

@@ -2,7 +2,11 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RECIPE_OPTIONS } from '../utils/constants';
 import { useCartStore } from '../store/cartStore';
+import { useAuth } from '../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import type { Product } from '../types';
+import BackToTop from '../components/common/BackToTop';
+import api from '../services/api';
 
 interface RecipeSelection {
   base: string;
@@ -14,6 +18,8 @@ interface RecipeSelection {
 
 const RecipeBuilder = () => {
   const { addToCart, openCart } = useCartStore();
+  const { user } = useAuth();
+  const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
   const [recipe, setRecipe] = useState<RecipeSelection>({
     base: '',
@@ -25,6 +31,8 @@ const RecipeBuilder = () => {
 
   const [recipeName, setRecipeName] = useState('');
   const [showConfetti, setShowConfetti] = useState(false);
+  const [saveLoading, setSaveLoading] = useState(false);
+  const [saveSuccess, setSaveSuccess] = useState(false);
 
   // Calculate total price
   const calculatePrice = () => {
@@ -135,6 +143,57 @@ const RecipeBuilder = () => {
       setShowConfetti(false);
       openCart();
     }, 1500);
+  };
+
+  // Handle saving recipe
+  const handleSaveRecipe = async () => {
+    // Check if user is logged in
+    if (!user) {
+      navigate('/login?redirect=/recipe-builder');
+      return;
+    }
+
+    // Validate recipe has a base
+    if (!recipe.base) {
+      alert('Please select a base before saving your recipe');
+      return;
+    }
+
+    setSaveLoading(true);
+
+    try {
+      // Prepare recipe data for backend
+      const recipeData = {
+        name: recipeName || generateRecipeName(),
+        ingredients: [
+          { name: 'Base', value: recipe.base },
+          ...recipe.flavors.map(f => ({ name: 'Flavor', value: f })),
+          ...recipe.mixins.map(m => ({ name: 'Mix-in', value: m })),
+          ...recipe.toppings.map(t => ({ name: 'Topping', value: t })),
+          { name: 'Size', value: recipe.size }
+        ],
+        instructions: [
+          { step: 1, description: 'Mix all ingredients together' },
+          { step: 2, description: 'Serve chilled' }
+        ],
+        price: calculatePrice()
+      };
+
+      // Save to backend
+      await api.post('/api/recipes/build', recipeData);
+
+      // Show success message
+      setSaveSuccess(true);
+      setTimeout(() => {
+        setSaveSuccess(false);
+      }, 3000);
+
+    } catch (error: any) {
+      console.error('Error saving recipe:', error);
+      alert(error.response?.data?.message || 'Failed to save recipe. Please try again.');
+    } finally {
+      setSaveLoading(false);
+    }
   };
 
   // Toggle flavor selection
@@ -493,15 +552,24 @@ const RecipeBuilder = () => {
                   >
                     ← Previous
                   </button>
-                  <button
-                    onClick={() => setCurrentStep(Math.min(5, currentStep + 1))}
-                    disabled={currentStep === 5}
-                    className={`btn-primary ${
-                      currentStep === 5 ? 'opacity-50 cursor-not-allowed' : ''
-                    }`}
-                  >
-                    Next →
-                  </button>
+                  {currentStep < 5 ? (
+                    <button
+                      onClick={() => setCurrentStep(Math.min(5, currentStep + 1))}
+                      className="btn-primary"
+                    >
+                      Next →
+                    </button>
+                  ) : (
+                    <button
+                      onClick={handleAddToCart}
+                      disabled={!recipe.base}
+                      className={`btn-primary ${
+                        !recipe.base ? 'opacity-50 cursor-not-allowed' : ''
+                      }`}
+                    >
+                      Add to Cart & Continue →
+                    </button>
+                  )}
                 </div>
               </motion.div>
             </div>
@@ -602,8 +670,14 @@ const RecipeBuilder = () => {
                   >
                     Add to Cart
                   </button>
-                  <button className="btn-outline w-full text-sm">
-                    Save Recipe
+                  <button
+                    onClick={handleSaveRecipe}
+                    disabled={!recipe.base || saveLoading}
+                    className={`btn-outline w-full text-sm ${
+                      !recipe.base || saveLoading ? 'opacity-50 cursor-not-allowed' : ''
+                    }`}
+                  >
+                    {saveLoading ? 'Saving...' : saveSuccess ? '✓ Saved!' : 'Save Recipe'}
                   </button>
                 </div>
               </motion.div>
@@ -611,6 +685,9 @@ const RecipeBuilder = () => {
           </div>
         </div>
       </section>
+
+      {/* Back to Top Button */}
+      <BackToTop />
     </div>
   );
 };

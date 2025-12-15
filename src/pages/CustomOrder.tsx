@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import DrinkSelector from '../components/product/DrinkSelector';
 import type { DrinkOption } from '../components/product/DrinkSelector';
+import BackToTop from '../components/common/BackToTop';
 import QuantitySelector from '../components/product/QuantitySelector';
 import GiftOptions from '../components/checkout/GiftOptions';
 import { useCartStore } from '../store/cartStore';
@@ -228,6 +229,8 @@ const CustomOrder = () => {
           </div>
         </motion.div>
       </div>
+      {/* Back to Top Button */}
+      <BackToTop />
     </div>
   );
 };

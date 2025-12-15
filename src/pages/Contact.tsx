@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';  // For navigation to FAQ page
 import { contactService } from '../services/contact.service';
+import BackToTop from '../components/common/BackToTop';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -282,12 +284,17 @@ const Contact = () => {
                 <p className="text-gray-600 mb-4">
                   Check out our FAQ page for quick answers to common questions.
                 </p>
-                <button className="btn-outline w-full">Visit FAQ</button>
+                {/* Link to FAQ page instead of non-functional button */}
+                <Link to="/faq" className="btn-outline w-full block text-center">
+                  Visit FAQ
+                </Link>
               </div>
             </motion.div>
           </div>
         </div>
       </section>
+      {/* Back to Top Button */}
+      <BackToTop />
     </div>
   );
 };

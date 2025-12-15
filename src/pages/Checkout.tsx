@@ -5,6 +5,7 @@ import { useCartStore } from '../store/cartStore';
 import { useAuth } from '../contexts/AuthContext';
 import axios from 'axios';
 import PayPalButton from '../components/checkout/PayPalButton';
+import BackToTop from '../components/common/BackToTop';
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -563,6 +564,9 @@ const Checkout = () => {
           </motion.div>
         )}
       </div>
+
+      {/* Back to Top Button */}
+      <BackToTop />
     </div>
   );
 };

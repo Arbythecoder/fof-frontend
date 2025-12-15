@@ -38,13 +38,14 @@ export interface User {
   name: string;
   email: string;
   phone?: string;
+  address?: string;
   role: 'user' | 'admin';
   avatar?: string;
-  addresses: Address[];
-  orders: string[];
-  wishlist: string[];
-  savedRecipes: string[];
-  loyaltyPoints: number;
+  addresses?: Address[];
+  orders?: string[];
+  wishlist?: string[];
+  savedRecipes?: string[];
+  loyaltyPoints?: number;
   createdAt: string;
 }
 

@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import BackToTop from '../components/common/BackToTop';
 
 const About = () => {
   return (
@@ -135,6 +136,8 @@ const About = () => {
           </div>
         </div>
       </section>
+      {/* Back to Top Button */}
+      <BackToTop />
     </div>
   );
 };

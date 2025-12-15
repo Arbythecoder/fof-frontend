@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Newsletter from '../components/Newsletter';
+import BackToTop from '../components/common/BackToTop';
 
 const Home = () => {
   // Animation variants
@@ -449,6 +450,9 @@ const Home = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* Back to Top Button */}
+      <BackToTop />
     </div>
   );
 };

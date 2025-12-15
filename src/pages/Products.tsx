@@ -1,10 +1,12 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import sampleProducts from '../data/sampleProducts';
 import type { DeliveryType, ProductData } from '../data/sampleProducts';
 import ProductImage from '../components/ProductImage';
 import { useCartStore } from '../store/cartStore';
 import type { Product } from '../types';
+import BackToTop from '../components/common/BackToTop';
 
 const Products = () => {
   const { addToCart, openCart } = useCartStore();
@@ -255,12 +257,17 @@ const Products = () => {
             ))}
           </div>
 
-          {/* View All Button */}
-          <div className="text-center mt-12">
-            <button className="btn-outline px-8 py-3">
-              View All Products
-            </button>
-          </div>
+          {/* View All Button - Resets filter */}
+          {selectedFilter !== 'all' && (
+            <div className="text-center mt-12">
+              <button
+                onClick={() => setSelectedFilter('all')}
+                className="btn-outline px-8 py-3"
+              >
+                View All Products
+              </button>
+            </div>
+          )}
         </div>
       </section>
 
@@ -278,15 +285,18 @@ const Products = () => {
             <p className="text-base sm:text-lg md:text-xl mb-6 md:mb-8 max-w-2xl mx-auto opacity-95">
               Create your perfect custom mocktail with our interactive recipe builder
             </p>
-            <a
-              href="/recipe-builder"
+            <Link
+              to="/recipe-builder"
               className="inline-block bg-white text-gold-primary font-semibold px-6 sm:px-8 md:px-12 py-3 md:py-4 rounded-fof hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
             >
               Build Your Recipe
-            </a>
+            </Link>
           </motion.div>
         </div>
       </section>
+
+      {/* Back to Top Button */}
+      <BackToTop />
     </div>
   );
 };

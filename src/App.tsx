@@ -16,6 +16,15 @@ import ForgotPassword from './pages/ForgotPassword';
 import Checkout from './pages/Checkout';
 import CustomOrder from './pages/CustomOrder';
 import Admin from './pages/Admin';
+import Profile from './pages/Profile';
+import Orders from './pages/Orders';
+import SavedRecipes from './pages/SavedRecipes';
+// Legal & Info Pages - imported for footer links
+import FAQ from './pages/FAQ';
+import Shipping from './pages/Shipping';
+import Returns from './pages/Returns';
+import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
 
 function App() {
   return (
@@ -37,7 +46,16 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/saved-recipes" element={<SavedRecipes />} />
           <Route path="/admin" element={<Admin />} />
+          {/* Legal & Info Pages - routes for footer links */}
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/shipping" element={<Shipping />} />
+          <Route path="/returns" element={<Returns />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
         </Routes>
       </main>
 
