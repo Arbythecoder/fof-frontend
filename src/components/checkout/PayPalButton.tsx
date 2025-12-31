@@ -75,7 +75,7 @@ const PayPalButton: React.FC<PayPalButtonProps> = ({ orderId, onSuccess, onError
 
   const initialOptions = {
     clientId: clientId,
-    currency: 'GBP',
+    currency: 'EUR',
     intent: 'capture',
   };
 
