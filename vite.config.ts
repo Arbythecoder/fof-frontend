@@ -4,8 +4,9 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  // No base path needed for Cloudflare Pages with custom domain
-  base: '/',
+  // For GitHub Pages: use '/fof-frontend/' as base path
+  // For custom domain: use '/'
+  base: '/fof-frontend/',
   build: {
     outDir: 'dist',
     sourcemap: false,
