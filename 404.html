@@ -7,7 +7,7 @@
     // https://github.com/rafgraph/spa-github-pages
     // This script redirects all 404 requests to index.html
     // which allows React Router to handle client-side routing
-    var pathSegmentsToKeep = 1; // Keep /fof-frontend/ in path
+    var pathSegmentsToKeep = 0; // Custom domain - no base path
     var l = window.location;
     l.replace(
       l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
@@ -21,7 +21,7 @@
 <body>
   <noscript>
     <p>JavaScript is required for this application to work.</p>
-    <p><a href="/fof-frontend/">Go to homepage</a></p>
+    <p><a href="/">Go to homepage</a></p>
   </noscript>
 </body>
 </html>
