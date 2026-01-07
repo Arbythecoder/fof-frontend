@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   // For GitHub Pages: use '/fof-frontend/' as base path
   // For custom domain: use '/'
-  base: '/fof-frontend/',
+  base: '/',
   build: {
     outDir: 'dist',
     sourcemap: false,
